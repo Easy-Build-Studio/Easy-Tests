@@ -15,7 +15,7 @@ interface Tests {
     Status: Status;
 }
 
-const RunnedTests = new Set<Tests>();
+export const RunnedTests = new Set<Tests>();
 
 declare global {
     function describe(description: string, fn: Callback): void;
