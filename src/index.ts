@@ -1,5 +1,5 @@
 import "./core/globals";
-import { passed } from "./utils/colours";
+import { passed } from "./utils/colors";
 
 describe("Tests", () => {
     test("Shouldn't log test", () => {
