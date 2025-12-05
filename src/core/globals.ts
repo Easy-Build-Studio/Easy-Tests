@@ -13,6 +13,7 @@ interface Tests {
     description: string;
     duration: number;
     Status: Status;
+    Error?: string;
 }
 
 export const RunnedTests = new Set<Tests>();
@@ -48,9 +49,9 @@ globalThis.expect = function <T>(value: T) {
                     description: "Test",
                     duration: 1,
                     Status: "Failed",
+                    Error: `${value} is expected to be ${other}`
                 };
                 RunnedTests.add(Test);
-                throw new Error(`${value} is expected to be ${other}`);
             } else {
                 const Test: Tests = {
                     description: "Test",
@@ -68,6 +69,7 @@ globalThis.expect = function <T>(value: T) {
                     description: "Test",
                     duration: 1,
                     Status: "Failed",
+                    Error: `${value} should not be ${other}`
                 };
                 RunnedTests.add(Test);
                 }

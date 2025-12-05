@@ -1,14 +1,13 @@
 import { RunnedTests } from "./globals";
-import { passed } from "../utils/colors";
-import "../index";
-
+import { passed, failed, grey, reset } from "../utils/colors";
+import "../tests/test";
 
 for (const runnedTest of RunnedTests) {
     if (runnedTest.Status === "Passed") {
-        passed(`${runnedTest.description} \n ${runnedTest.duration}ms`)
+        passed(`${runnedTest.description} \n ${grey} ${runnedTest.duration} ${reset}`)
     }
 
     if (runnedTest.Status === "Failed") {
-        passed(`${runnedTest.description} \n ${runnedTest.duration}`)
+        failed(`${runnedTest.description} \n ${grey} ${runnedTest.duration} ${reset} \n Error: ${runnedTest.Error}`)
     }
 }
