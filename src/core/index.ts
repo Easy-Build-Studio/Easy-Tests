@@ -1,0 +1,1 @@
+export * as easyrunner from "./runnedtests";

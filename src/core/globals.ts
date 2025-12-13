@@ -11,9 +11,14 @@ type Status = "Passed" | "Failed";
 
 interface Tests {
     description: string;
-    duration: number;
     Status: Status;
     Error?: string;
+}
+
+interface TotalTest {
+    Amount: number;
+    TotalFails: number;
+    TotalPassed: number;
 }
 
 export const RunnedTests = new Set<Tests>();
@@ -27,17 +32,14 @@ declare global {
 
 
 globalThis.describe = function (description: string, fn: Callback) {
-    console.log(description);
     fn();
 }
 
 globalThis.test = function (description: string, fn: Test) {
-    console.log(description);
     fn();
 }
 
 globalThis.it = function (description: string, fn: Test) {
-    console.log(description);
     fn();
 }
 
@@ -47,7 +49,6 @@ globalThis.expect = function <T>(value: T) {
             if (value !== other) {
                 const Test: Tests = {
                     description: "Test",
-                    duration: 1,
                     Status: "Failed",
                     Error: `${value} is expected to be ${other}`
                 };
@@ -55,7 +56,6 @@ globalThis.expect = function <T>(value: T) {
             } else {
                 const Test: Tests = {
                     description: "Test",
-                    duration: 1,
                     Status: "Passed",
                 };
                 RunnedTests.add(Test);
@@ -67,7 +67,6 @@ globalThis.expect = function <T>(value: T) {
                 if (value === other) {
                 const Test: Tests = {
                     description: "Test",
-                    duration: 1,
                     Status: "Failed",
                     Error: `${value} should not be ${other}`
                 };
@@ -76,7 +75,6 @@ globalThis.expect = function <T>(value: T) {
                 else {
                     const Test: Tests = {
                         description: "Test",
-                        duration: 1,
                         Status: "Passed",
                     };
                     RunnedTests.add(Test);
